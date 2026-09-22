@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>QR Code Generator</h1>
+      <p>Generate QR codes for Wi-Fi networks, websites, and text.</p>
+    </header>
+
+    <main class="card">
+      <!-- Type selector -->
+      <div class="tabs" role="tablist" aria-label="QR code type">
+        <button type="button" class="tab active" data-type="wifi" role="tab" aria-selected="true">Wi-Fi</button>
+        <button type="button" class="tab" data-type="website" role="tab" aria-selected="false">Website</button>
+        <button type="button" class="tab" data-type="text" role="tab" aria-selected="false">Text</button>
+      </div>
+
+      <!-- Shared error box -->
+      <div id="form-error" class="error-message" role="alert" hidden></div>
+
+      <!-- Wi-Fi form -->
+      <form id="wifi-form" class="qr-form" novalidate>
+        <div class="field">
+          <label for="wifi-ssid">Network name (SSID)</label>
+          <input type="text" id="wifi-ssid" name="ssid" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="wifi-password">Password</label>
+          <input type="password" id="wifi-password" name="password" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="wifi-security">Security type</label>
+          <select id="wifi-security" name="security">
+            <option value="WPA" selected>WPA/WPA2</option>
+            <option value="WEP">WEP</option>
+            <option value="nopass">None</option>
+          </select>
+        </div>
+        <div class="field checkbox-field">
+          <input type="checkbox" id="wifi-hidden" name="hidden">
+          <label for="wifi-hidden">Hidden network</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate QR Code</button>
+      </form>
+
+      <!-- Website form -->
+      <form id="website-form" class="qr-form" hidden novalidate>
+        <div class="field">
+          <label for="website-url">Website URL</label>
+          <input type="text" id="website-url" name="url" placeholder="https://example.com" autocomplete="off" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate QR Code</button>
+      </form>
+
+      <!-- Text form -->
+      <form id="text-form" class="qr-form" hidden novalidate>
+        <div class="field">
+          <label for="text-content">Text</label>
+          <textarea id="text-content" name="text" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Generate QR Code</button>
+      </form>
+
+      <!-- QR preview -->
+      <section id="qr-result" class="qr-result" hidden>
+        <img id="qr-image" alt="Generated QR code" />
+        <div class="result-actions">
+          <button type="button" id="download-btn" class="btn btn-primary">Download PNG</button>
+          <button type="button" id="generate-again-btn" class="btn btn-secondary">Generate Again</button>
+          <button type="button" id="clear-btn" class="btn btn-secondary">Clear</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Everything is generated locally. Wi-Fi passwords and other input are never stored or sent to third parties.</p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
