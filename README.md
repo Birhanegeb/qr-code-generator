@@ -8,6 +8,8 @@ website URLs, and plain text, preview the result, and download it as a PNG
 image. Everything runs locally - there is no database, no external QR
 generation API, and no third-party services involved.
 
+![QR Code Generator webpage](static/qr-code-generator.png)
+
 ## Features
 
 - Wi-Fi QR codes (SSID, password, security type, hidden network support)
